@@ -1,0 +1,34 @@
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Poetry
+        run: pipx install poetry
+      - name: Install dependencies
+        run: poetry install
+      - name: Lint and test before publishing
+        run: |
+          poetry run ruff check src/ tests/
+          poetry run pytest -v
+      - name: Build
+        run: poetry build
+      - name: Publish
+        env:
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
+        run: poetry publish
+
+# PYPI_TOKEN is the org secret referenced in the GitHub Repository
+# Structure doc -- add it in repo Settings > Secrets before the first
+# tag push, or this job fails at the publish step (safely, after tests
+# already passed).
