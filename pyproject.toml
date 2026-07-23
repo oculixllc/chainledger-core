@@ -5,8 +5,8 @@ description = "Neutral, read-only on-chain data over public BigQuery datasets."
 authors = ["Oculix LLC"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/oculix-ai/chainledger-core"
-repository = "https://github.com/oculix-ai/chainledger-core"
+homepage = "https://github.com/oculixllc/chainledger-core"
+repository = "https://github.com/oculixllc/chainledger-core"
 keywords = ["ethereum", "blockchain", "bigquery", "on-chain-data"]
 classifiers = [
   "Development Status :: 3 - Alpha",
