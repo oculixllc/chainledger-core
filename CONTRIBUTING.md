@@ -2,7 +2,7 @@
 
 ## Setup
 ```bash
-git clone https://github.com/oculix-ai/chainledger-core
+git clone https://github.com/oculixllc/chainledger-core
 cd chainledger-core
 poetry install
 ```
