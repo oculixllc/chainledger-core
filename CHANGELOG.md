@@ -1,3 +1,6 @@
+<!-- path-declared -->
+> **File path:** `CHANGELOG.md`
+
 # Changelog
 
 ## [Unreleased]

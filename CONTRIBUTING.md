@@ -1,3 +1,6 @@
+<!-- path-declared -->
+> **File path:** `CONTRIBUTING.md`
+
 # Contributing to chainledger-core
 
 ## Setup

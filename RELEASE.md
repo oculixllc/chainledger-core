@@ -1,3 +1,6 @@
+<!-- path-declared -->
+> **File path:** `RELEASE.md`
+
 # Release Process
 
 1. Update `version` in `pyproject.toml` and add an entry to `CHANGELOG.md`.

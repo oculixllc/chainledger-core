@@ -1,3 +1,6 @@
+<!-- path-declared -->
+> **File path:** `README.md`
+
 # chainledger-core
 
 Neutral, read-only on-chain data over public BigQuery blockchain datasets.

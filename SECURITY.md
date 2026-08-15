@@ -1,3 +1,6 @@
+<!-- path-declared -->
+> **File path:** `SECURITY.md`
+
 # Security Policy
 
 ## Reporting a Vulnerability

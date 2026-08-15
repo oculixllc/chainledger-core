@@ -1,3 +1,6 @@
+<!-- path-declared -->
+> **File path:** `CODE_OF_CONDUCT.md`
+
 # Code of Conduct
 
 Be respectful, be constructive, assume good faith. Harassment, personal
