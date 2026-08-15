@@ -22,7 +22,7 @@ python = "^3.10"
 google-cloud-bigquery = "^3.25.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.0.0"
+pytest = ">=8,<10"
 ruff = "^0.6.0"
 
 [build-system]
