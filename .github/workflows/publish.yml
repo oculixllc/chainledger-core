@@ -5,9 +5,32 @@ on:
     tags:
       - 'v*'
 
+# Fixed 2026-08-19 (security audit item, direct/material to ChainLedger
+# grant credibility since this PyPI package is the artifact reviewers
+# inspect): was authenticating with a static, long-lived PYPI_TOKEN repo
+# secret -- a leaked token could let an attacker publish a malicious
+# version of a real, installable package. Switched to PyPI's Trusted
+# Publishing (OIDC) -- the workflow requests a short-lived token at
+# publish time via id-token: write, no secret stored anywhere, nothing
+# to leak. Trusted Publisher configured on PyPI's side
+# (pypi.org/manage/project/chainledger-core/settings/publishing/,
+# GitHub / oculixllc / chainledger-core / publish.yml) before this
+# workflow change; PYPI_TOKEN repo secret can be deleted once a real
+# tag push confirms this works end-to-end.
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # No `environment:` here -- matches the PyPI Trusted Publisher config,
+    # which was set up with Environment name left blank. If a dedicated
+    # GitHub Actions environment is added later for extra protection
+    # (recommended by PyPI's own UI for repos with maintainers who
+    # shouldn't have publish access), this and the PyPI-side config must
+    # be updated together or the OIDC claim won't match and publishing
+    # will fail.
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
@@ -23,12 +46,5 @@ jobs:
           poetry run pytest -v
       - name: Build
         run: poetry build
-      - name: Publish
-        env:
-          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
-        run: poetry publish
-
-# PYPI_TOKEN is the org secret referenced in the GitHub Repository
-# Structure doc -- add it in repo Settings > Secrets before the first
-# tag push, or this job fails at the publish step (safely, after tests
-# already passed).
+      - name: Publish to PyPI via Trusted Publishing (OIDC, no token)
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
